@@ -7,5 +7,5 @@ export const refs = {
     loader: document.querySelector(".loader"),
     modal: document.querySelector('.modal'),
     productModal: document.querySelector(".modal-product"),
-    closeModalBttn: document.querySelector(".modal__close-btn"),
+    loadMoreBtn: document.querySelector('.load-more__btn'),
 };

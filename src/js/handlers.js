@@ -7,7 +7,7 @@ import { pullData } from "./products-api";
 import { renderCategory, renderGoods, renderModal } from "./render-function";
 import { refs } from "./refs";
 import { notFoundDisabled, notFoundEnabled } from "./helpers";
-import { showModal, hideModal } from "./modal";
+import { showModal } from "./modal";
 
 export function switchCategory(evt) {
     if (evt.target.tagName === "BUTTON") {
@@ -44,8 +44,8 @@ export function handleSelectProduct(event) {
         const selectedProdId = event.target.closest('li').dataset.id;
         pullData(`https://dummyjson.com/products/${selectedProdId}`)
             .then(response => {
-                renderModal(response.data)
-                showModal()
+                renderModal(response.data);
+                showModal();
             })
             .catch(error => iziToast.error({
                 message: `${error.message}`

@@ -11,7 +11,16 @@ export function notFoundDisabled() {
     }
 }
 
-export function loaderShow() {
-
+export function showLoader() {
+    refs.loader.style.display = 'inline-block';
+}
+export function hideLoader() {
+    refs.loader.style.display = 'none';
+}
+export function showLoadMoreBtn() {
+    refs.loadMoreBtn.style.display = 'block';
+}
+export function hideLoadMoreBtn() {
+    refs.loadMoreBtn.style.display = 'none';
 }
 

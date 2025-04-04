@@ -6,6 +6,7 @@ import { refs } from "./js/refs";
 import { STORAGE_KEYS } from "./js/constants";
 import { pullData } from "./js/products-api";
 import { renderCategory, renderGoods } from "./js/render-function";
+import { switchCategory } from "./js/handlers"
 
 let currentPage = 1;
 const goodsUrl = `https://dummyjson.com/products?limit=12&skip=${(currentPage - 1) * 12}`;
@@ -23,3 +24,5 @@ pullData(goodsUrl)
     .catch(error => iziToast.error({
         message: `${error.message}`
     }));
+
+refs.listCategories.addEventListener('click', switchCategory);

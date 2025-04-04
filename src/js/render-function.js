@@ -19,7 +19,7 @@ export function renderGoods(arrGoods) {
             <p class="products__title">${title}</p>
             <p class="products__brand"><span class="products__brand--bold">Brand: ${brand}</span></p>
             <p class="products__category">Category: ${category} </p>
-            <p class="products__price">Price: ${price}$</p>
+            <p class="products__price">Price: ${price} $</p>
         </li>`).join("");
     refs.listProducts.innerHTML = markup;
 };

@@ -4,4 +4,8 @@ export const refs = {
     listCategories: document.querySelector(".categories"),
     listProducts: document.querySelector(".products"),
     notFound: document.querySelector(".not-found"),
+    loader: document.querySelector(".loader"),
+    modal: document.querySelector('.modal'),
+    productModal: document.querySelector(".modal-product"),
+    closeModalBttn: document.querySelector(".modal__close-btn"),
 };

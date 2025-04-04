@@ -4,8 +4,10 @@ import "izitoast/dist/css/iziToast.min.css";
 
 import { STORAGE_KEYS } from "./constants";
 import { pullData } from "./products-api";
-import { renderCategory, renderGoods } from "./render-function";
+import { renderCategory, renderGoods, renderModal } from "./render-function";
 import { refs } from "./refs";
+import { notFoundDisabled, notFoundEnabled } from "./helpers";
+import { showModal, hideModal } from "./modal";
 
 export function switchCategory(evt) {
     if (evt.target.tagName === "BUTTON") {
@@ -24,9 +26,10 @@ export function switchCategory(evt) {
                 .then(response => {
                     if (response.data.products.length === 0) {
                         console.log('HEY');
-                        refs.notFound.classList.add('not-found--visible');
+                        notFoundEnabled();
                         return;
                     }
+                    notFoundDisabled();
                     renderGoods(response.data.products)
                 })
                 .catch(error => iziToast.error({
@@ -34,4 +37,19 @@ export function switchCategory(evt) {
                 }));
         }
     };
+};
+
+export function handleSelectProduct(event) {
+    if (event.target.tagName != "UL") {
+        const selectedProdId = event.target.closest('li').dataset.id;
+        pullData(`https://dummyjson.com/products/${selectedProdId}`)
+            .then(response => {
+                renderModal(response.data)
+                showModal()
+            })
+            .catch(error => iziToast.error({
+                message: `${error.message}`
+            }))
+    }
 }
+

@@ -23,3 +23,19 @@ export function renderGoods(arrGoods) {
         </li>`).join("");
     refs.listProducts.innerHTML = markup;
 };
+
+export function renderModal({ images, description, title, tags, shippingInformation, returnPolicy, price }) {
+    const markup =
+        `<img class="modal-product__img" src="${images[0]}" alt="${description}" />
+        <div class="modal-product__content">
+        <p class="modal-product__title">${title}</p>
+        <ul class="modal-product__tags">${tags.join(', ')}</ul>
+        <p class="modal-product__description">${description}</p>
+        <p class="modal-product__shipping-information">Shipping: ${shippingInformation}</p>
+        <p class="modal-product__return-policy">Return Policy: ${returnPolicy}</p>
+        <p class="modal-product__price">Price: ${price} $</p>
+        
+        </div>
+    `
+    refs.productModal.innerHTML = markup;
+};

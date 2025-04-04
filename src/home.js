@@ -6,7 +6,8 @@ import { refs } from "./js/refs";
 import { STORAGE_KEYS } from "./js/constants";
 import { pullData } from "./js/products-api";
 import { renderCategory, renderGoods } from "./js/render-function";
-import { switchCategory } from "./js/handlers"
+import { switchCategory, handleSelectProduct } from "./js/handlers"
+import { hideModal } from "./js/modal";
 
 let currentPage = 1;
 const goodsUrl = `https://dummyjson.com/products?limit=12&skip=${(currentPage - 1) * 12}`;
@@ -26,3 +27,6 @@ pullData(goodsUrl)
     }));
 
 refs.listCategories.addEventListener('click', switchCategory);
+refs.listProducts.addEventListener('click', handleSelectProduct)
+
+refs.closeModalBttn.addEventListener('click', hideModal);

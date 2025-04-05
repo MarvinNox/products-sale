@@ -27,3 +27,11 @@ export function showLoadMoreBtn() {
 export function hideLoadMoreBtn() {
     refs.loadMoreBtn.style.display = 'none';
 }
+
+export function smoothScroll() {
+    const galleryCard = document.querySelector('.products__item').getBoundingClientRect();
+    window.scrollBy({
+        top: galleryCard.height * 2,
+        behavior: 'smooth',
+    })
+}

@@ -7,6 +7,7 @@ import axios from "axios";
 import { clearProductsList, renderCategory, renderGoods } from "./render-function.js";
 import { getGoodsByID, getGoodsUrl, hideLoader, hideLoadMoreBtn, showLoadMoreBtn } from "./helpers.js";
 import iziToast from "izitoast";
+import { refs } from "./refs.js";
 
 export function pullData(KEY) {
     return axios.get(`${KEY}`);
@@ -68,6 +69,9 @@ export async function fetchCartList(id) {
         const responses = await Promise.all(requests);
         const products = responses.map(obj => obj.data);
         renderGoods(products);
+        refs.totalItemsCount.textContent = responses.length;
+        const totalPrice = responses.map(item => item.data.price).reduce((acc, item) => acc + item);
+        refs.totalItemsPrice.textContent = `$ ${totalPrice.toFixed(2)}`;
     } catch (error) {
         iziToast.error({
             message: error.message,

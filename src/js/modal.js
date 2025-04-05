@@ -1,8 +1,11 @@
 //Описана робота модалки - відкриття закриття і все що з модалкою повʼязано
+
 import { refs } from "./refs";
 import { addToCart, addToWishList } from "./handlers"
 import { STORAGE_KEYS } from "./constants";
 import { getCart, getWishlist } from "./storage.js"
+import { fetchCartList, fetchWishList } from "./products-api.js";
+
 
 export function showModal() {
     refs.modal.classList.add('modal--is-open');
@@ -19,7 +22,6 @@ export function showModal() {
     } else {
         refs.addToCartBtn.textContent = 'Add to Cart'
     }
-
     document.addEventListener('keydown', escapeModal);
     refs.addToCartBtn.addEventListener('click', addToCart);
     refs.addToWishBtn.addEventListener('click', addToWishList);
@@ -28,13 +30,27 @@ export function showModal() {
 export function hideModal(evt) {
     if (evt.target.classList.contains("modal__close-btn") || evt.target === evt.currentTarget) {
         closeModal();
-    }
+    };
+};
+
+export function hideWishModal(evt) {
+    if (evt.target.classList.contains("modal__close-btn") || evt.target === evt.currentTarget) {
+        closeModal();
+        fetchWishList(getWishlist());
+    };
+};
+
+export function hideCartModal(evt) {
+    if (evt.target.classList.contains("modal__close-btn") || evt.target === evt.currentTarget) {
+        closeModal();
+        fetchCartList(getCart());
+    };
 };
 
 function escapeModal(evt) {
     if (evt.key === 'Escape') {
         closeModal();
-    }
+    };
 };
 
 function closeModal() {
@@ -42,7 +58,6 @@ function closeModal() {
         refs.modal.classList.remove('modal--is-open');
     }
     document.removeEventListener('keydown', escapeModal);
-
     refs.addToCartBtn.removeEventListener('click', addToCart);
     refs.addToWishBtn.removeEventListener('click', addToWishList);
 };

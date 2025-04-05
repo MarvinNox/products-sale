@@ -149,7 +149,6 @@ export function searchSubmit(evt) {
 
     pullData(getGoodsUrl(STORAGE_KEYS.searchValue))
         .then(response => {
-
             if (response.data.total === 0) {
                 clearProductsList();
                 hideLoadMoreBtn()
@@ -174,7 +173,7 @@ export function searchSubmit(evt) {
             smoothScroll();
         })
         .catch((error) => iziToast.error({
-            message: `${error.message}`
+            message: `${console.log(error)}`
         }))
         .finally(() => {
             hideLoader();

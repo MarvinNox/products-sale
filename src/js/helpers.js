@@ -4,12 +4,13 @@ import { refs } from "./refs";
 
 export function notFoundEnabled() {
     refs.notFound.classList.add('not-found--visible');
-}
+};
+
 export function notFoundDisabled() {
     if (refs.notFound.classList.contains('not-found--visible')) {
         refs.notFound.classList.remove('not-found--visible');
-    }
-}
+    };
+};
 
 export function getGoodsUrl(q = '', currentPage = 1, selectedCategory = '') {
     if (q) {
@@ -23,26 +24,25 @@ export function getGoodsUrl(q = '', currentPage = 1, selectedCategory = '') {
 
 export function getGoodsByID(id) {
     return `https://dummyjson.com/products/${id}`
-}
-
+};
 
 export function showLoader() {
     refs.loader.style.display = 'inline-block';
-}
+};
 export function hideLoader() {
     refs.loader.style.display = 'none';
-}
+};
 export function showLoadMoreBtn() {
     refs.loadMoreBtn.style.display = 'block';
-}
+};
 export function hideLoadMoreBtn() {
     refs.loadMoreBtn.style.display = 'none';
-}
+};
 
 export function smoothScroll() {
     const galleryCard = document.querySelector('.products__item').getBoundingClientRect();
     window.scrollBy({
         top: galleryCard.height * 1,
         behavior: 'smooth',
-    })
-}
+    });
+};

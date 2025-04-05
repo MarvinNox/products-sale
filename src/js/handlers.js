@@ -183,3 +183,15 @@ export function searchSubmit(evt) {
 export function clearSearch() {
     refs.form.elements.searchValue.value = '';
 };
+
+export function buyCart() {
+    if (+refs.totalItemsCount.textContent) {
+        iziToast.success({
+            message: 'Success!'
+        });
+    } else {
+        iziToast.error({
+            message: 'Cart is empty!'
+        })
+    };
+};

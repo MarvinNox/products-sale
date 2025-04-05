@@ -12,7 +12,7 @@ import { hideWishModal } from "./js/modal";
 setCartCount();
 setWishListCount();
 
-const id = getWishlist();
+const id = getWishlist() || [];
 id.length == 0 ? notFoundEnabled() : notFoundDisabled();
 
 fetchWishList(id);

@@ -16,5 +16,4 @@ export const refs = {
     wishListCount: document.querySelector('[data-wishlist-count]'),
     totalItemsCount: document.querySelector('[data-count]'),
     totalItemsPrice: document.querySelector('[data-price]'),
-
 };

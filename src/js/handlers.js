@@ -87,7 +87,7 @@ export function handleSelectProduct(event) {
     };
 };
 
-export function addToWishList(event) {
+export function addToWishList() {
     const wishList = getWishlist() || [];
     if (wishList.some(item => item === STORAGE_KEYS.selectedProdId)) {
         removeFromWishlist(STORAGE_KEYS.selectedProdId);
@@ -111,9 +111,8 @@ export function addToCart(event) {
     refs.addToCartBtn.textContent = 'Remove from Cart';
 };
 
-export function handleLoadMore(evt) {
-    showLoader()
-    console.log(getGoodsUrl(STORAGE_KEYS.searchValue, STORAGE_KEYS.currentPagey,));
+export function handleLoadMore() {
+    showLoader();
     pullData(getGoodsUrl(STORAGE_KEYS.searchValue, STORAGE_KEYS.currentPage, STORAGE_KEYS.selectedCategory))
         .then(response => {
             if (response.data.total <= (STORAGE_KEYS.currentPage * 12)) {
@@ -137,7 +136,7 @@ export function handleLoadMore(evt) {
 export function searchSubmit(evt) {
     evt.preventDefault();
     notFoundDisabled();
-    showLoader()
+    showLoader();
     STORAGE_KEYS.searchValue = (evt.target.elements.searchValue.value).trim();
     if (!STORAGE_KEYS.searchValue) {
         iziToast.error({
@@ -151,7 +150,7 @@ export function searchSubmit(evt) {
         .then(response => {
             if (response.data.total === 0) {
                 clearProductsList();
-                hideLoadMoreBtn()
+                hideLoadMoreBtn();
                 notFoundEnabled();
                 iziToast.info({
                     message: 'Sorry! No results'
@@ -159,12 +158,12 @@ export function searchSubmit(evt) {
                 return;
             } else {
                 showLoadMoreBtn();
-            }
+            };
             if (response.data.total <= (STORAGE_KEYS.currentPage - 1) * 12) {
                 hideLoadMoreBtn();
                 iziToast.warning({
                     message: 'Oops! You reach all of goods!'
-                })
+                });
                 return;
             };
             clearProductsList();
@@ -177,7 +176,7 @@ export function searchSubmit(evt) {
         }))
         .finally(() => {
             hideLoader();
-        })
+        });
     refs.form.reset();
 };
 

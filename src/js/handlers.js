@@ -195,3 +195,28 @@ export function buyCart() {
         })
     };
 };
+
+function debounce(func, delay) {
+    let timeout;
+    return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), delay);
+    };
+}
+
+export function scrollUpBtn() {
+    if (window.pageYOffset > 300) {
+        refs.scrollUpBtn.classList.add("show");
+    } else {
+        refs.scrollUpBtn.classList.remove("show");
+    }
+};
+
+export const scrollUpBtnShow = debounce(scrollUpBtn, 300);
+
+export function scrollUp() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}

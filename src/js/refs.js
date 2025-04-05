@@ -17,4 +17,5 @@ export const refs = {
     totalItemsCount: document.querySelector('[data-count]'),
     totalItemsPrice: document.querySelector('[data-price]'),
     buyBtn: document.querySelector('.cart-summary__btn'),
+    scrollUpBtn: document.querySelector('.scrollToTopBtn'),
 };

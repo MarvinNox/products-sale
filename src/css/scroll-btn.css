@@ -1,0 +1,29 @@
+.scrollToTopBtn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 1000;
+  padding: 1rem 2rem;
+  font-weight: 600;
+  font-size: 18px;
+  color: white;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+
+  background: #ff6b0a;
+}
+.scrollToTopBtn:hover {
+  background: #e05a00;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 10, 0.1);
+  scale: 1.05;
+}
+
+.scrollToTopBtn.show {
+  opacity: 1;
+  visibility: visible;
+}

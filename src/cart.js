@@ -1,7 +1,7 @@
 //Логіка сторінки Cart
 
 import { refs } from "./js/refs";
-import { notFoundDisabled, notFoundEnabled } from "./js/helpers";
+import { notFoundDisabled, notFoundEnabled, scrollUp, scrollUpBtnShow } from "./js/helpers";
 import { fetchCartList } from "./js/products-api";
 import { getCart } from "./js/storage";
 import { setCartCount, setWishListCount } from "./js/render-function";

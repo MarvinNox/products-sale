@@ -1,0 +1,2 @@
+import"./assets/styles-B8WhyOyT.js";import{i as e}from"./assets/vendor-X279WPgE.js";import{s as o,a as i,g as r,b as d,p as l,r as n,c as t,h as c,d as m}from"./assets/handlers-DlDVg0Zb.js";o();i();const h=r(),p=h.map(s=>d(s));let u=p.map(s=>l(s));Promise.all(u).then(s=>s.map(a=>a.data)).then(s=>{n(s)}).catch(s=>e.error({message:s.message}));t.listProducts.addEventListener("click",c);t.modal.addEventListener("click",m);
+//# sourceMappingURL=wishlist.js.map

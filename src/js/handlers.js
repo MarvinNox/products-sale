@@ -13,7 +13,8 @@ import {
     getGoodsUrl,
     showLoadMoreBtn,
     hideLoadMoreBtn,
-    getSearchUrl
+    showLoader,
+    hideLoader,
 } from "./helpers.js";
 import { showModal } from "./modal";
 import {
@@ -32,6 +33,8 @@ export function switchCategory(evt) {
         const selectedUrl = `https://dummyjson.com/products/category/${selectedCategory}`;
 
         if (selectedCategory === 'all') {
+            STORAGE_KEYS.currentPage = 2;
+            STORAGE_KEYS.searchValue = '';
             pullData(STORAGE_KEYS.BASE_URL_ALL)
                 .then(response => {
                     STORAGE_KEYS.currentPage++;
@@ -103,8 +106,15 @@ export function addToCart(event) {
 };
 
 export function handleLoadMore(evt) {
-    pullData(getGoodsUrl(STORAGE_KEYS.currentPage))
+    showLoader()
+    pullData(getGoodsUrl(STORAGE_KEYS.searchValue, STORAGE_KEYS.currentPage))
         .then(response => {
+
+            response.data.total > (STORAGE_KEYS.currentPage * 12) ? showLoadMoreBtn() : hideLoadMoreBtn();
+
+            console.log('total:', response.data.total);
+            console.log('curr:', ((STORAGE_KEYS.currentPage) * 12));
+
             if (response.data.total < (STORAGE_KEYS.currentPage - 1) * 12) {
                 hideLoadMoreBtn();
                 iziToast.warning({
@@ -114,20 +124,25 @@ export function handleLoadMore(evt) {
             }
             renderGoods(response.data.products);
             STORAGE_KEYS.currentPage++;
-            showLoadMoreBtn();
             smoothScroll()
         })
         .catch((error) => iziToast.error({
             message: `${error.message}`
         }))
+        .finally(() => hideLoader())
 }
 
 export function searchSubmit(evt) {
     evt.preventDefault();
-    STORAGE_KEYS.searchValue = (evt.target.elements.searchValue.value); // input
+    showLoader()
+    STORAGE_KEYS.searchValue = (evt.target.elements.searchValue.value);
     STORAGE_KEYS.currentPage = 1;
-    pullData(getSearchUrl(STORAGE_KEYS.searchValue, STORAGE_KEYS.currentPage))
+
+    pullData(getGoodsUrl(STORAGE_KEYS.searchValue))
         .then(response => {
+            console.log('1st total:', response.data.total);
+            console.log('1st curr:', ((STORAGE_KEYS.currentPage) * 12));
+
             if (response.data.total < (STORAGE_KEYS.currentPage - 1) * 12) {
                 hideLoadMoreBtn();
                 iziToast.warning({
@@ -137,10 +152,15 @@ export function searchSubmit(evt) {
             }
             clearProductsList();
             renderGoods(response.data.products)
+            STORAGE_KEYS.currentPage++;
         })
         .catch((error) => iziToast.error({
             message: `${error.message}`
         }))
+        .finally(() => {
+            hideLoader();
+            smoothScroll();
+        })
     refs.form.reset()
 }
 export function clearSearch() {

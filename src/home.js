@@ -38,7 +38,7 @@ pullData(STORAGE_KEYS.CATEGORIES_KEY)
     }))
 
 
-pullData(getGoodsUrl(STORAGE_KEYS.currentPage))
+pullData(getGoodsUrl(STORAGE_KEYS.searchValue, STORAGE_KEYS.currentPage))
     .then(response => {
         renderGoods(response.data.products);
         if (response.data.total > (STORAGE_KEYS.currentPage - 1) * 12) {

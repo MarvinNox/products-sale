@@ -11,13 +11,16 @@ export function notFoundDisabled() {
     }
 }
 
-export function getGoodsUrl(currentPage = 1) {
-    return `https://dummyjson.com/products?limit=12&skip=${(currentPage - 1) * 12}`;
+export function getGoodsUrl(q = '', currentPage = 1) {
+    if (q) {
+        return `https://dummyjson.com/products/search?q=${q}&limit=12&skip=${(currentPage - 1) * 12}`;
+    } else {
+        return `https://dummyjson.com/products?limit=12&skip=${(currentPage - 1) * 12}`;
+    }
+
+
 };
 
-export function getSearchUrl(q, currentPage = 1) {
-    return `https://dummyjson.com/products/search?q=${q}&limit=12&skip=${(currentPage - 1) * 12}`;
-};
 
 export function showLoader() {
     refs.loader.style.display = 'inline-block';
@@ -35,7 +38,7 @@ export function hideLoadMoreBtn() {
 export function smoothScroll() {
     const galleryCard = document.querySelector('.products__item').getBoundingClientRect();
     window.scrollBy({
-        top: galleryCard.height * 2,
+        top: galleryCard.height * 1,
         behavior: 'smooth',
     })
 }

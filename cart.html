@@ -5,8 +5,11 @@
     <link rel="icon" type="image/svg+xml" href="/products-sale/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cart</title>
-    <script type="module" crossorigin src="/products-sale/assets/styles-B8WhyOyT.js"></script>
-    <link rel="stylesheet" crossorigin href="/products-sale/assets/styles-CRQh6LmU.css">
+    <script type="module" crossorigin src="/products-sale/cart.js"></script>
+    <link rel="modulepreload" crossorigin href="/products-sale/assets/vendor-htf-bluc.js">
+    <link rel="modulepreload" crossorigin href="/products-sale/assets/handlers-BYHh_WSh.js">
+    <link rel="stylesheet" crossorigin href="/products-sale/assets/handlers-CRQh6LmU.css">
+    <link rel="stylesheet" crossorigin href="/products-sale/assets/vendor-DnveWo0P.css">
   </head>
   <body>
     <header class="header">
@@ -62,6 +65,10 @@
       <div class="container product-page">
         <main>
           <ul class="products"></ul>
+          <div class="loaders">
+            <span class="loader"></span>
+            <button class="load-more__btn" type="button">Load More</button>
+          </div>
           <div class="not-found">
             <div class="not-found__icon">
               <svg

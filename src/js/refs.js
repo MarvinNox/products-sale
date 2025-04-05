@@ -1,6 +1,8 @@
 //Обʼєкт з посиланнями на ДОМ елементи
 
 export const refs = {
+    form: document.querySelector('.search-form'),
+    clearSearchBtn: document.querySelector('.search-form__btn-clear'),
     listCategories: document.querySelector(".categories"),
     listProducts: document.querySelector(".products"),
     notFound: document.querySelector(".not-found"),

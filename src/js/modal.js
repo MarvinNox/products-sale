@@ -20,7 +20,6 @@ export function showModal() {
         refs.addToCartBtn.textContent = 'Add to Cart'
     }
 
-
     document.addEventListener('keydown', escapeModal);
     refs.addToCartBtn.addEventListener('click', addToCart);
     refs.addToWishBtn.addEventListener('click', addToWishList);

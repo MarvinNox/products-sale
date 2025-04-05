@@ -12,7 +12,8 @@ import {
     smoothScroll,
     getGoodsUrl,
     showLoadMoreBtn,
-    hideLoadMoreBtn
+    hideLoadMoreBtn,
+    getSearchUrl
 } from "./helpers.js";
 import { showModal } from "./modal";
 import {
@@ -107,7 +108,7 @@ export function handleLoadMore(evt) {
             if (response.data.total < (STORAGE_KEYS.currentPage - 1) * 12) {
                 hideLoadMoreBtn();
                 iziToast.warning({
-                    message: 'Oops! You reach and of goods!'
+                    message: 'Oops! You reach all of goods!'
                 })
                 return;
             }
@@ -119,4 +120,29 @@ export function handleLoadMore(evt) {
         .catch((error) => iziToast.error({
             message: `${error.message}`
         }))
+}
+
+export function searchSubmit(evt) {
+    evt.preventDefault();
+    STORAGE_KEYS.searchValue = (evt.target.elements.searchValue.value); // input
+    STORAGE_KEYS.currentPage = 1;
+    pullData(getSearchUrl(STORAGE_KEYS.searchValue, STORAGE_KEYS.currentPage))
+        .then(response => {
+            if (response.data.total < (STORAGE_KEYS.currentPage - 1) * 12) {
+                hideLoadMoreBtn();
+                iziToast.warning({
+                    message: 'Oops! You reach all of goods!'
+                })
+                return;
+            }
+            clearProductsList();
+            renderGoods(response.data.products)
+        })
+        .catch((error) => iziToast.error({
+            message: `${error.message}`
+        }))
+    refs.form.reset()
+}
+export function clearSearch() {
+    refs.form.elements.searchValue.value = '';
 }

@@ -15,6 +15,10 @@ export function getGoodsUrl(currentPage = 1) {
     return `https://dummyjson.com/products?limit=12&skip=${(currentPage - 1) * 12}`;
 };
 
+export function getSearchUrl(q, currentPage = 1) {
+    return `https://dummyjson.com/products/search?q=${q}&limit=12&skip=${(currentPage - 1) * 12}`;
+};
+
 export function showLoader() {
     refs.loader.style.display = 'inline-block';
 }

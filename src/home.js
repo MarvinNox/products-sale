@@ -13,7 +13,9 @@ import {
 import {
     switchCategory,
     handleSelectProduct,
-    handleLoadMore
+    handleLoadMore,
+    searchSubmit,
+    clearSearch
 } from "./js/handlers"
 import { hideModal } from "./js/modal";
 import {
@@ -55,8 +57,10 @@ pullData(getGoodsUrl(STORAGE_KEYS.currentPage))
     });
 
 refs.listCategories.addEventListener('click', switchCategory);
-refs.listProducts.addEventListener('click', handleSelectProduct)
+refs.listProducts.addEventListener('click', handleSelectProduct);
+refs.form.addEventListener('submit', searchSubmit);
+refs.clearSearchBtn.addEventListener('click', clearSearch);
 
-refs.modal.addEventListener('click', hideModal)
+refs.modal.addEventListener('click', hideModal);
 
-refs.loadMoreBtn.addEventListener('click', handleLoadMore)
+refs.loadMoreBtn.addEventListener('click', handleLoadMore);

@@ -21,7 +21,7 @@ export function renderGoods(arrGoods) {
             <p class="products__category">Category: ${category} </p>
             <p class="products__price">Price: ${price} $</p>
         </li>`).join("");
-    refs.listProducts.innerHTML = markup;
+    refs.listProducts.insertAdjacentHTML('beforeend', markup);
 };
 
 export function renderModal({ images, description, title, tags, shippingInformation, returnPolicy, price }) {
@@ -39,3 +39,7 @@ export function renderModal({ images, description, title, tags, shippingInformat
     `
     refs.productModal.innerHTML = markup;
 };
+
+export function clearProductsList() {
+    refs.listProducts.innerHTML = "";
+}

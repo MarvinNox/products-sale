@@ -5,30 +5,58 @@ import "izitoast/dist/css/iziToast.min.css";
 import { refs } from "./js/refs";
 import { STORAGE_KEYS } from "./js/constants";
 import { pullData } from "./js/products-api";
-import { renderCategory, renderGoods } from "./js/render-function";
-import { switchCategory, handleSelectProduct } from "./js/handlers"
+import {
+    renderCategory,
+    renderGoods,
+    clearProductsList
+} from "./js/render-function";
+import {
+    switchCategory,
+    handleSelectProduct,
+    handleLoadMore
+} from "./js/handlers"
 import { hideModal } from "./js/modal";
-import { showLoader, hideLoader } from "./js/helpers";
+import {
+    showLoader,
+    hideLoader,
+    showLoadMoreBtn,
+    hideLoadMoreBtn,
+    getGoodsUrl,
+} from "./js/helpers";
 
-let currentPage = 1;
-const goodsUrl = `https://dummyjson.com/products?limit=12&skip=${(currentPage - 1) * 12}`;
-
+// export let currentPage = 1;
 
 pullData(STORAGE_KEYS.CATEGORIES_KEY)
-    .then(response => renderCategory(response.data)
+    .then(response => {
+        renderCategory(response.data)
+    }
     )
     .catch(error => iziToast.error({
         message: `${error.message}`
-    }));
+    }))
 
-pullData(goodsUrl)
-    .then(response => renderGoods(response.data.products))
+
+pullData(getGoodsUrl(STORAGE_KEYS.currentPage))
+    .then(response => {
+        renderGoods(response.data.products);
+        if (response.data.total > (STORAGE_KEYS.currentPage - 1) * 12) {
+            STORAGE_KEYS.currentPage++;
+            showLoadMoreBtn();
+        } else {
+            hideLoadMoreBtn();
+        }
+    })
     .catch(error => iziToast.error({
         message: `${error.message}`
     }))
-    .finally(() => hideLoader());
+    .finally(() => {
+        hideLoader()
+
+    });
 
 refs.listCategories.addEventListener('click', switchCategory);
 refs.listProducts.addEventListener('click', handleSelectProduct)
 
 refs.modal.addEventListener('click', hideModal)
+
+refs.loadMoreBtn.addEventListener('click', handleLoadMore)

@@ -4,10 +4,12 @@ import "izitoast/dist/css/iziToast.min.css";
 
 import { STORAGE_KEYS } from "./constants";
 import { pullData } from "./products-api";
-import { renderCategory, renderGoods, renderModal } from "./render-function";
+import { clearProductsList, renderGoods, renderModal } from "./render-function";
 import { refs } from "./refs";
 import { notFoundDisabled, notFoundEnabled } from "./helpers";
 import { showModal } from "./modal";
+import { addToLocal, getFromLocal } from "./storage.js"
+import { getGoodsUrl, showLoadMoreBtn, hideLoadMoreBtn } from "./helpers.js";
 
 export function switchCategory(evt) {
     if (evt.target.tagName === "BUTTON") {
@@ -16,7 +18,11 @@ export function switchCategory(evt) {
 
         if (selectedCategory === 'all') {
             pullData(STORAGE_KEYS.BASE_URL_ALL)
-                .then(response => renderGoods(response.data.products))
+                .then(response => {
+                    clearProductsList();
+                    renderGoods(response.data.products);
+                    showLoadMoreBtn();
+                })
                 .catch(error => iziToast.error({
                     message: `${error.message}`
                 }));
@@ -25,16 +31,18 @@ export function switchCategory(evt) {
             pullData(selectedUrl)
                 .then(response => {
                     if (response.data.products.length === 0) {
-                        console.log('HEY');
                         notFoundEnabled();
                         return;
                     }
                     notFoundDisabled();
+                    clearProductsList()
                     renderGoods(response.data.products)
+                    hideLoadMoreBtn()
                 })
                 .catch(error => iziToast.error({
                     message: `${error.message}`
-                }));
+                }))
+                .finally(() => hideLoadMoreBtn)
         }
     };
 };
@@ -53,3 +61,26 @@ export function handleSelectProduct(event) {
     }
 }
 
+export function addToWishList(event) {
+
+};
+export function addToCart(event) {
+
+};
+
+export function handleLoadMore(evt) {
+    pullData(getGoodsUrl(STORAGE_KEYS.currentPage))
+        .then(response => {
+            renderGoods(response.data.products);
+            if (response.data.total > (STORAGE_KEYS.currentPage - 1) * 12) {
+                STORAGE_KEYS.currentPage++;
+                showLoadMoreBtn();
+            } else {
+                hideLoadMoreBtn();
+            }
+
+        })
+        .catch((error) => iziToast.error({
+            message: `${error.message}`
+        }))
+}

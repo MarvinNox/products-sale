@@ -11,6 +11,10 @@ export function notFoundDisabled() {
     }
 }
 
+export function getGoodsUrl(currentPage = 1) {
+    return `https://dummyjson.com/products?limit=12&skip=${(currentPage - 1) * 12}`;
+};
+
 export function showLoader() {
     refs.loader.style.display = 'inline-block';
 }
@@ -23,4 +27,3 @@ export function showLoadMoreBtn() {
 export function hideLoadMoreBtn() {
     refs.loadMoreBtn.style.display = 'none';
 }
-

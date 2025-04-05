@@ -1,5 +1,6 @@
 //Описана робота модалки - відкриття закриття і все що з модалкою повʼязано
 import { refs } from "./refs";
+import { addToCart, addToWishList } from "./handlers"
 
 export function showModal() {
     refs.modal.classList.add('modal--is-open');

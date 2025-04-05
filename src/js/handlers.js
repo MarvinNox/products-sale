@@ -47,14 +47,13 @@ export function switchCategory(evt) {
                 }));
             return;
         } else {
+            STORAGE_KEYS.currentPage = 1;
             pullData(selectedUrl)
                 .then(response => {
-                    console.log(response.data.total);
                     if (response.data.total === 0) {
                         notFoundEnabled();
                         return;
                     };
-                    console.log(response.data.total);
                     notFoundDisabled();
                     clearProductsList();
                     renderGoods(response.data.products);
@@ -172,7 +171,7 @@ export function searchSubmit(evt) {
             smoothScroll();
         })
         .catch((error) => iziToast.error({
-            message: `${console.log(error)}`
+            message: error.message,
         }))
         .finally(() => {
             hideLoader();

@@ -17,10 +17,8 @@ refs.form.addEventListener('submit', searchSubmit);
 refs.clearSearchBtn.addEventListener('click', clearSearch);
 refs.modal.addEventListener('click', hideModal);
 refs.loadMoreBtn.addEventListener('click', handleLoadMore);
-
-
 window.addEventListener('scroll', scrollUpBtnShow);
-refs.scrollUpBtn.addEventListener('click', scrollUp)
+refs.scrollUpBtn.addEventListener('click', scrollUp);
 
 setCartCount();
 setWishListCount();

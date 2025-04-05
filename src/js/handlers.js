@@ -109,18 +109,16 @@ export function handleLoadMore(evt) {
     showLoader()
     pullData(getGoodsUrl(STORAGE_KEYS.searchValue, STORAGE_KEYS.currentPage))
         .then(response => {
+            console.log('-1:', (STORAGE_KEYS.currentPage - 1) * 12);
+            console.log('0:', (STORAGE_KEYS.currentPage * 12));
 
-            response.data.total > (STORAGE_KEYS.currentPage * 12) ? showLoadMoreBtn() : hideLoadMoreBtn();
-
-            console.log('total:', response.data.total);
-            console.log('curr:', ((STORAGE_KEYS.currentPage) * 12));
-
-            if (response.data.total < (STORAGE_KEYS.currentPage - 1) * 12) {
+            if (response.data.total <= (STORAGE_KEYS.currentPage * 12)) {
                 hideLoadMoreBtn();
                 iziToast.warning({
-                    message: 'Oops! You reach all of goods!'
-                })
-                return;
+                    message: 'Oops! You reached all of the goods!',
+                });
+            } else {
+                showLoadMoreBtn();
             }
             renderGoods(response.data.products);
             STORAGE_KEYS.currentPage++;
@@ -135,34 +133,47 @@ export function handleLoadMore(evt) {
 export function searchSubmit(evt) {
     evt.preventDefault();
     showLoader()
-    STORAGE_KEYS.searchValue = (evt.target.elements.searchValue.value);
+    STORAGE_KEYS.searchValue = (evt.target.elements.searchValue.value).trim();
+    if (!STORAGE_KEYS.searchValue) {
+        iziToast.error({
+            message: 'Please enter a valid name!'
+        })
+        return
+    }
     STORAGE_KEYS.currentPage = 1;
 
     pullData(getGoodsUrl(STORAGE_KEYS.searchValue))
         .then(response => {
-            console.log('1st total:', response.data.total);
-            console.log('1st curr:', ((STORAGE_KEYS.currentPage) * 12));
 
-            if (response.data.total < (STORAGE_KEYS.currentPage - 1) * 12) {
+            if (response.data.total <= (STORAGE_KEYS.currentPage - 1) * 12) {
                 hideLoadMoreBtn();
                 iziToast.warning({
                     message: 'Oops! You reach all of goods!'
                 })
                 return;
             }
+            if (response.data.total === 0) {
+                clearProductsList();
+                hideLoadMoreBtn()
+                iziToast.info({
+                    message: 'Sorry! No results'
+                })
+                return;
+            }
             clearProductsList();
             renderGoods(response.data.products)
             STORAGE_KEYS.currentPage++;
+            smoothScroll();
         })
         .catch((error) => iziToast.error({
             message: `${error.message}`
         }))
         .finally(() => {
             hideLoader();
-            smoothScroll();
         })
     refs.form.reset()
 }
+
 export function clearSearch() {
     refs.form.elements.searchValue.value = '';
 }

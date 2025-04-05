@@ -34,7 +34,6 @@ export function renderModal({ images, description, title, tags, shippingInformat
         <p class="modal-product__shipping-information">Shipping: ${shippingInformation}</p>
         <p class="modal-product__return-policy">Return Policy: ${returnPolicy}</p>
         <p class="modal-product__price">Price: ${price} $</p>
-        
         </div>
     `
     refs.productModal.innerHTML = markup;

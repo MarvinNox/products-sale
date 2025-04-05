@@ -21,6 +21,11 @@ export function getGoodsUrl(q = '', currentPage = 1, selectedCategory = '') {
     };
 };
 
+export function getGoodsByID(id) {
+    return `https://dummyjson.com/products/${id}`
+}
+
+
 export function showLoader() {
     refs.loader.style.display = 'inline-block';
 }

@@ -1,4 +1,5 @@
 // Функції, які передаються колбеками в addEventListners
+
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
@@ -25,7 +26,6 @@ import {
     saveCart,
     removeFromCart,
 } from "./storage.js"
-
 
 export function switchCategory(evt) {
     if (evt.target.tagName === "BUTTON") {

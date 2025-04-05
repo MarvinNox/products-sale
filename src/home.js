@@ -8,7 +8,9 @@ import { pullData } from "./js/products-api";
 import {
     renderCategory,
     renderGoods,
-    clearProductsList
+    clearProductsList,
+    setCartCount,
+    setWishListCount
 } from "./js/render-function";
 import {
     switchCategory,
@@ -60,7 +62,8 @@ refs.listCategories.addEventListener('click', switchCategory);
 refs.listProducts.addEventListener('click', handleSelectProduct);
 refs.form.addEventListener('submit', searchSubmit);
 refs.clearSearchBtn.addEventListener('click', clearSearch);
-
 refs.modal.addEventListener('click', hideModal);
-
 refs.loadMoreBtn.addEventListener('click', handleLoadMore);
+
+setCartCount();
+setWishListCount();

@@ -1,5 +1,6 @@
 //Функцію для створення, рендеру або видалення розмітки
 import { refs } from "./refs";
+import { getCart, getWishlist } from "./storage";
 
 export function renderCategory(arrCategories) {
     arrCategories.unshift('all');
@@ -41,3 +42,16 @@ export function renderModal({ images, description, title, tags, shippingInformat
 export function clearProductsList() {
     refs.listProducts.innerHTML = "";
 };
+
+export function setCartCount() {
+    const count = getCart() || [];
+    refs.cartCount.textContent = count.length;
+};
+export function setWishListCount() {
+    const count = getWishlist() || [];
+    refs.wishListCount.textContent = count.length;
+};
+
+export function renderWishList({ arr = getWishlist() || [] }) {
+
+}

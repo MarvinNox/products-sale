@@ -18,7 +18,7 @@ export function getGoodsUrl(q = '', currentPage = 1, selectedCategory = '') {
         return `https://dummyjson.com/products/category/${selectedCategory}?limit=12&skip=${(currentPage - 1) * 12}`
     } else {
         return `https://dummyjson.com/products?limit=12&skip=${(currentPage - 1) * 12}`;
-    }
+    };
 };
 
 export function showLoader() {

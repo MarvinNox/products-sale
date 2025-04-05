@@ -1,6 +1,5 @@
 //Функцію для створення, рендеру або видалення розмітки
 import { refs } from "./refs";
-import { STORAGE_KEYS } from "./constants";
 
 export function renderCategory(arrCategories) {
     arrCategories.unshift('all');
@@ -41,4 +40,4 @@ export function renderModal({ images, description, title, tags, shippingInformat
 
 export function clearProductsList() {
     refs.listProducts.innerHTML = "";
-}
+};

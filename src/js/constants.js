@@ -7,5 +7,6 @@ export let STORAGE_KEYS = {
     CATEGORIES_KEY: "https://dummyjson.com/products/category-list",
     currentPage: 1,
     selectedProdId: '',
+    selectedCategory: '',
     searchValue: '',
 };

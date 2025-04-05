@@ -29,10 +29,10 @@ import {
 
 export function switchCategory(evt) {
     if (evt.target.tagName === "BUTTON") {
-        const selectedCategory = evt.target.textContent;
-        const selectedUrl = `https://dummyjson.com/products/category/${selectedCategory}`;
-
-        if (selectedCategory === 'all') {
+        STORAGE_KEYS.selectedCategory = evt.target.textContent;
+        const selectedUrl = `https://dummyjson.com/products/category/${STORAGE_KEYS.selectedCategory}?limit=12&skip=0`;
+        if (STORAGE_KEYS.selectedCategory === 'all') {
+            STORAGE_KEYS.selectedCategory = '';
             STORAGE_KEYS.currentPage = 2;
             STORAGE_KEYS.searchValue = '';
             pullData(STORAGE_KEYS.BASE_URL_ALL)
@@ -49,20 +49,26 @@ export function switchCategory(evt) {
         } else {
             pullData(selectedUrl)
                 .then(response => {
-                    if (response.data.products.length === 0) {
+                    console.log(response.data.total);
+                    if (response.data.total === 0) {
                         notFoundEnabled();
                         return;
-                    }
+                    };
+                    console.log(response.data.total);
                     notFoundDisabled();
-                    clearProductsList()
-                    renderGoods(response.data.products)
-                    hideLoadMoreBtn()
+                    clearProductsList();
+                    renderGoods(response.data.products);
+                    if (response.data.total < 12) {
+                        hideLoadMoreBtn();
+                    } else {
+                        showLoadMoreBtn();
+                    }
                 })
                 .catch(error => iziToast.error({
                     message: `${error.message}`
                 }))
-                .finally(() => hideLoadMoreBtn)
-        }
+                .finally(() => hideLoadMoreBtn);
+        };
     };
 };
 
@@ -78,8 +84,8 @@ export function handleSelectProduct(event) {
             .catch(error => iziToast.error({
                 message: `${error.message}`
             }))
-    }
-}
+    };
+};
 
 export function addToWishList(event) {
     const wishList = getWishlist() || [];
@@ -88,10 +94,11 @@ export function addToWishList(event) {
         refs.addToWishBtn.textContent = 'Add to Wishlist';
         return;
     }
-    wishList.push(STORAGE_KEYS.selectedProdId)
-    saveWishlist(wishList)
-    refs.addToWishBtn.textContent = 'Remove from Wishlist'
+    wishList.push(STORAGE_KEYS.selectedProdId);
+    saveWishlist(wishList);
+    refs.addToWishBtn.textContent = 'Remove from Wishlist';
 };
+
 export function addToCart(event) {
     const cartList = getCart() || [];
     if (cartList.some(item => item === STORAGE_KEYS.selectedProdId)) {
@@ -99,19 +106,16 @@ export function addToCart(event) {
         refs.addToCartBtn.textContent = 'Add to Cart';
         return;
     }
-    cartList.push(STORAGE_KEYS.selectedProdId)
-    saveCart(cartList)
-    refs.addToCartBtn.textContent = 'Remove from Cart'
-
+    cartList.push(STORAGE_KEYS.selectedProdId);
+    saveCart(cartList);
+    refs.addToCartBtn.textContent = 'Remove from Cart';
 };
 
 export function handleLoadMore(evt) {
     showLoader()
-    pullData(getGoodsUrl(STORAGE_KEYS.searchValue, STORAGE_KEYS.currentPage))
+    console.log(getGoodsUrl(STORAGE_KEYS.searchValue, STORAGE_KEYS.currentPagey,));
+    pullData(getGoodsUrl(STORAGE_KEYS.searchValue, STORAGE_KEYS.currentPage, STORAGE_KEYS.selectedCategory))
         .then(response => {
-            console.log('-1:', (STORAGE_KEYS.currentPage - 1) * 12);
-            console.log('0:', (STORAGE_KEYS.currentPage * 12));
-
             if (response.data.total <= (STORAGE_KEYS.currentPage * 12)) {
                 hideLoadMoreBtn();
                 iziToast.warning({
@@ -119,49 +123,53 @@ export function handleLoadMore(evt) {
                 });
             } else {
                 showLoadMoreBtn();
-            }
+            };
             renderGoods(response.data.products);
             STORAGE_KEYS.currentPage++;
-            smoothScroll()
+            smoothScroll();
         })
         .catch((error) => iziToast.error({
             message: `${error.message}`
         }))
-        .finally(() => hideLoader())
-}
+        .finally(() => hideLoader());
+};
 
 export function searchSubmit(evt) {
     evt.preventDefault();
+    notFoundDisabled();
     showLoader()
     STORAGE_KEYS.searchValue = (evt.target.elements.searchValue.value).trim();
     if (!STORAGE_KEYS.searchValue) {
         iziToast.error({
             message: 'Please enter a valid name!'
         })
-        return
-    }
+        return;
+    };
     STORAGE_KEYS.currentPage = 1;
 
     pullData(getGoodsUrl(STORAGE_KEYS.searchValue))
         .then(response => {
 
+            if (response.data.total === 0) {
+                clearProductsList();
+                hideLoadMoreBtn()
+                notFoundEnabled();
+                iziToast.info({
+                    message: 'Sorry! No results'
+                })
+                return;
+            } else {
+                showLoadMoreBtn();
+            }
             if (response.data.total <= (STORAGE_KEYS.currentPage - 1) * 12) {
                 hideLoadMoreBtn();
                 iziToast.warning({
                     message: 'Oops! You reach all of goods!'
                 })
                 return;
-            }
-            if (response.data.total === 0) {
-                clearProductsList();
-                hideLoadMoreBtn()
-                iziToast.info({
-                    message: 'Sorry! No results'
-                })
-                return;
-            }
+            };
             clearProductsList();
-            renderGoods(response.data.products)
+            renderGoods(response.data.products);
             STORAGE_KEYS.currentPage++;
             smoothScroll();
         })
@@ -171,9 +179,9 @@ export function searchSubmit(evt) {
         .finally(() => {
             hideLoader();
         })
-    refs.form.reset()
-}
+    refs.form.reset();
+};
 
 export function clearSearch() {
     refs.form.elements.searchValue.value = '';
-}
+};

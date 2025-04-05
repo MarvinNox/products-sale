@@ -11,16 +11,15 @@ export function notFoundDisabled() {
     }
 }
 
-export function getGoodsUrl(q = '', currentPage = 1) {
+export function getGoodsUrl(q = '', currentPage = 1, selectedCategory = '') {
     if (q) {
         return `https://dummyjson.com/products/search?q=${q}&limit=12&skip=${(currentPage - 1) * 12}`;
+    } else if (selectedCategory) {
+        return `https://dummyjson.com/products/category/${selectedCategory}?limit=12&skip=${(currentPage - 1) * 12}`
     } else {
         return `https://dummyjson.com/products?limit=12&skip=${(currentPage - 1) * 12}`;
     }
-
-
 };
-
 
 export function showLoader() {
     refs.loader.style.display = 'inline-block';

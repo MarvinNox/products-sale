@@ -6,7 +6,7 @@
 
   text-align: center;
 
-  background: #fff;
+  background: var(--search__back--focus);
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   animation: fadeInUp 0.4s ease-out;
@@ -38,7 +38,7 @@
 .not-found__description {
   margin: 0;
 
-  color: #4a5568;
+  color: var(--products__categ);
   line-height: 1.6;
   font-size: 1rem;
 }

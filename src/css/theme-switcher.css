@@ -1,7 +1,7 @@
 .theme-toggle-button {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  left: 20px;
   padding: 12px 24px;
   font-size: 16px;
   font-weight: bold;
@@ -16,11 +16,8 @@
   color: white;
 }
 
-/* .theme-toggle-button {
-  background: linear-gradient(45deg, #ffcc00, #ff9900);
-  color: #333;
-} */
-
 .theme-toggle-button:hover {
   transform: scale(1.1);
+  background: linear-gradient(45deg, #ffcc00, #ff9900);
+  color: #333;
 }

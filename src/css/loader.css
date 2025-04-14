@@ -11,7 +11,7 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border-top: 4px solid #fff;
+  border-top: 4px solid #ffcc00;
   border-right: 4px solid transparent;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
@@ -41,13 +41,8 @@
 .load-more__btn {
   display: none;
   padding: 1rem 2rem;
-
-  /* margin-left: 50%;
-  transform: translateX(-50%); */
-
   color: white;
   font-weight: 600;
-
   border: none;
   border-radius: 30px;
   background: #ff6b0a;
@@ -58,12 +53,10 @@
   &:focus {
     background-color: #e05a00;
     transform: scale(1.05);
-    /* transform: scale(1.05) translateX(-50%); */
     box-shadow: 0 4px 12px rgba(255, 107, 10, 0.3);
   }
 
   &:active {
     transform: scale(0.95);
-    /* transform: scale(0.95) translateX(-50%); */
   }
 }

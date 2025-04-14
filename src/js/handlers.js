@@ -30,7 +30,7 @@ import {
     setTheme,
 } from "./storage.js"
 
-export function switchCategory(evt) {
+export async function switchCategory(evt) {
     if (evt.target.tagName === "BUTTON") {
         STORAGE_KEYS.selectedCategory = evt.target.textContent;
         const selectedUrl = `https://dummyjson.com/products/category/${STORAGE_KEYS.selectedCategory}?limit=12&skip=0`;
@@ -38,7 +38,7 @@ export function switchCategory(evt) {
             STORAGE_KEYS.selectedCategory = '';
             STORAGE_KEYS.currentPage = 2;
             STORAGE_KEYS.searchValue = '';
-            pullData(STORAGE_KEYS.BASE_URL_ALL)
+            await pullData(STORAGE_KEYS.BASE_URL_ALL)
                 .then(response => {
                     STORAGE_KEYS.currentPage++;
                     clearProductsList();
@@ -51,7 +51,7 @@ export function switchCategory(evt) {
             return;
         } else {
             STORAGE_KEYS.currentPage = 1;
-            pullData(selectedUrl)
+            await pullData(selectedUrl)
                 .then(response => {
                     if (response.data.total === 0) {
                         notFoundEnabled();
@@ -74,11 +74,11 @@ export function switchCategory(evt) {
     };
 };
 
-export function handleSelectProduct(event) {
+export async function handleSelectProduct(event) {
 
     if (event.target.tagName != "UL") {
         STORAGE_KEYS.selectedProdId = event.target.closest('li').dataset.id;
-        pullData(`https://dummyjson.com/products/${STORAGE_KEYS.selectedProdId}`)
+        await pullData(`https://dummyjson.com/products/${STORAGE_KEYS.selectedProdId}`)
             .then(response => {
                 renderModal(response.data);
                 showModal();
@@ -113,9 +113,9 @@ export function addToCart(event) {
     refs.addToCartBtn.textContent = 'Remove from Cart';
 };
 
-export function handleLoadMore() {
+export async function handleLoadMore() {
     showLoader();
-    pullData(getGoodsUrl(STORAGE_KEYS.searchValue, STORAGE_KEYS.currentPage, STORAGE_KEYS.selectedCategory))
+    await pullData(getGoodsUrl(STORAGE_KEYS.searchValue, STORAGE_KEYS.currentPage, STORAGE_KEYS.selectedCategory))
         .then(response => {
             if (response.data.total <= (STORAGE_KEYS.currentPage * 12)) {
                 hideLoadMoreBtn();
@@ -135,7 +135,7 @@ export function handleLoadMore() {
         .finally(() => hideLoader());
 };
 
-export function searchSubmit(evt) {
+export async function searchSubmit(evt) {
     evt.preventDefault();
     notFoundDisabled();
     showLoader();
@@ -147,8 +147,7 @@ export function searchSubmit(evt) {
         return;
     };
     STORAGE_KEYS.currentPage = 1;
-
-    pullData(getGoodsUrl(STORAGE_KEYS.searchValue))
+    await pullData(getGoodsUrl(STORAGE_KEYS.searchValue))
         .then(response => {
             if (response.data.total === 0) {
                 clearProductsList();

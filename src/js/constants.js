@@ -18,7 +18,8 @@ export const STORAGE_KEYS = {
         '--nav__counter': '#ff6b0a',
         '--categ__btn': '#2d3748',
         '--products__item--back': '#fff',
-        '--products__categ': '#4a5568'
+        '--products__categ': '#4a5568',
+        '--color2': '#010101'
     },
     dark: {
         '--main__text': '#e9e8e8',
@@ -28,6 +29,7 @@ export const STORAGE_KEYS = {
         '--nav__counter': 'f8f9fa',
         '--categ__btn': '#d2c8b7',
         '--products__item--back': '#3a3a3a',
-        '--products__categ': '#b5aa97'
+        '--products__categ': '#b5aa97',
+        '--color2': '#ffffff'
     },
 };

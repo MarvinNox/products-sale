@@ -3,10 +3,12 @@
 import { refs } from "./js/refs";
 import { fetchCategories, fetchProducts } from "./js/products-api";
 import { setCartCount, setWishListCount } from "./js/render-function";
-import { switchCategory, handleSelectProduct, handleLoadMore, searchSubmit, clearSearch, scrollUpBtnShow, scrollUp } from "./js/handlers"
+import { switchCategory, handleSelectProduct, handleLoadMore, searchSubmit, clearSearch, scrollUpBtnShow, scrollUp, themeToggler } from "./js/handlers"
 import { hideModal } from "./js/modal";
+import { detectTheme } from "./js/helpers";
 
 
+detectTheme();
 
 fetchCategories();
 fetchProducts();
@@ -19,6 +21,7 @@ refs.modal.addEventListener('click', hideModal);
 refs.loadMoreBtn.addEventListener('click', handleLoadMore);
 window.addEventListener('scroll', scrollUpBtnShow);
 refs.scrollUpBtn.addEventListener('click', scrollUp);
+refs.colorChangeBtn.addEventListener('click', themeToggler);
 
 setCartCount();
 setWishListCount();

@@ -1,6 +1,8 @@
 //Допоміжні функції
 
+import { STORAGE_KEYS } from "./constants";
 import { refs } from "./refs";
+import { getTheme } from "./storage";
 
 export function notFoundEnabled() {
     refs.notFound.classList.add('not-found--visible');
@@ -46,3 +48,16 @@ export function smoothScroll() {
         behavior: 'smooth',
     });
 };
+
+export function applyTheme(mode) {
+    Object.entries(mode).forEach(([key, value]) => {
+        refs.root.style.setProperty(key, value);
+    });
+};
+
+export function detectTheme() {
+    const savedTheme = getTheme();
+    if (savedTheme) {
+        applyTheme(STORAGE_KEYS.dark);
+    }
+}

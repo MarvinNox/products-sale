@@ -24,7 +24,7 @@
   max-height: 90vh;
   padding: 2rem;
 
-  background: white;
+  background: var(--products__item--back);
   border-radius: 12px;
   transform: scale(0.95);
   animation: scaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -44,7 +44,7 @@
   height: 400px;
   object-fit: contain;
   border-radius: 8px;
-  background: #f8f9fa;
+  background: var(--search__back);
 }
 
 .modal-product__content {
@@ -57,7 +57,7 @@
   margin: 0;
 
   font-size: 1.75rem;
-  color: #2d3748;
+  color: var(--categ__btn);
   font-weight: 600;
 }
 
@@ -85,7 +85,7 @@
 .modal-product__description {
   margin: 1rem 0;
 
-  color: #4a5568;
+  color: var(--products__categ);
   line-height: 1.6;
 }
 
@@ -173,7 +173,7 @@
 }
 
 .modal-product__btn--wishlist {
-  background: white;
+  background: var(--search__back--focus);
   color: #ff6b0a;
   border: 2px solid #ff6b0a;
 }

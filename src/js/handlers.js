@@ -16,6 +16,7 @@ import {
     hideLoadMoreBtn,
     showLoader,
     hideLoader,
+    applyTheme,
 } from "./helpers.js";
 import { showModal } from "./modal";
 import {
@@ -25,6 +26,8 @@ import {
     getCart,
     saveCart,
     removeFromCart,
+    getTheme,
+    setTheme,
 } from "./storage.js"
 
 export function switchCategory(evt) {
@@ -201,14 +204,14 @@ function debounce(func, delay) {
         clearTimeout(timeout);
         timeout = setTimeout(() => func.apply(this, args), delay);
     };
-}
+};
 
 export function scrollUpBtn() {
     if (window.pageYOffset > 300) {
         refs.scrollUpBtn.classList.add("show");
     } else {
         refs.scrollUpBtn.classList.remove("show");
-    }
+    };
 };
 
 export const scrollUpBtnShow = debounce(scrollUpBtn, 300);
@@ -218,4 +221,15 @@ export function scrollUp() {
         top: 0,
         behavior: "smooth"
     });
-}
+};
+
+export function themeToggler() {
+    let currentTheme = getTheme();
+    if (!currentTheme) {
+        applyTheme(STORAGE_KEYS.dark);
+        setTheme(true);
+    } else {
+        applyTheme(STORAGE_KEYS.light)
+        setTheme(false);
+    }
+};

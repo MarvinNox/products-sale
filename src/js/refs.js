@@ -18,4 +18,6 @@ export const refs = {
     totalItemsPrice: document.querySelector('[data-price]'),
     buyBtn: document.querySelector('.cart-summary__btn'),
     scrollUpBtn: document.querySelector('.scrollToTopBtn'),
+    colorChangeBtn: document.querySelector('.theme-toggle-button'),
+    root: document.documentElement,
 };

@@ -62,13 +62,13 @@
 .nav__count {
   padding: 0.2rem 0.6rem;
 
-  color: #ff6b0a;
+  color: var(--nav__counter);
   font-size: 0.8rem;
   font-weight: 600;
 
-  border: 1px solid #ff6b0a;
+  border: 1px solid var(--nav__counter);
   border-radius: 15px;
-  background: #fff;
+  background: var(--search__back--focus);
   transition: 200ms ease-in;
 
   .nav__link:hover &,

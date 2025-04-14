@@ -23,15 +23,15 @@
   padding: 1rem 2rem;
 
   font-size: 1rem;
-
+  color: var(--main_text);
   border: none;
   border-radius: 30px;
-  background: #f8f9fa;
+  background: var(--search__back);
   transition: all 0.3s ease;
 
   &:focus {
     outline: 2px solid #ff6b0a;
-    background: #fff;
+    background: var(--search__back--focus);
     box-shadow: 0 0 8px rgba(255, 107, 10, 0.2);
   }
 

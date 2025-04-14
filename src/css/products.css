@@ -7,7 +7,7 @@
 .products__item {
   padding: 1.5rem;
 
-  background: #fff;
+  background: var(--products__item--back);
   border-radius: 12px;
   list-style: none;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
@@ -37,7 +37,7 @@
 .products__title {
   margin-bottom: 0.5rem;
 
-  color: #2d3748;
+  color: var(--categ__btn);
   font-size: 1.1rem;
   font-weight: 600;
 
@@ -51,7 +51,7 @@
 .products__brand,
 .products__category {
   font-size: 0.9rem;
-  color: #4a5568;
+  color: var(--products__categ);
   line-height: 1.4;
 }
 
@@ -61,7 +61,7 @@
 
 .products__brand--bold {
   font-weight: 500;
-  color: #2d3748;
+  color: var(--categ__btn);
 }
 
 .products__category {

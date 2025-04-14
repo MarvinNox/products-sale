@@ -30,3 +30,10 @@ export function removeFromCart(id) {
     saveCart(getCart().filter(item => item !== id));
     setCartCount();
 };
+
+export function getTheme() {
+    return JSON.parse(localStorage.getItem(STORAGE_KEYS.LS_USER_THEME)) || false;
+}
+export function setTheme(newTheme) {
+    localStorage.setItem(STORAGE_KEYS.LS_USER_THEME, JSON.stringify(newTheme));
+}

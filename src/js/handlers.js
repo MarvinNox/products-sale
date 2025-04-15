@@ -236,10 +236,10 @@ export function scrollUp() {
 export function themeToggler() {
     let currentTheme = getTheme();
     if (!currentTheme) {
-        applyTheme(STORAGE_KEYS.dark);
+        applyTheme();
         setTheme(true);
     } else {
-        applyTheme(STORAGE_KEYS.light)
+        applyTheme()
         setTheme(false);
     }
 };

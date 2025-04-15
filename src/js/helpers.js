@@ -50,15 +50,13 @@ export function smoothScroll() {
 };
 
 export function applyTheme(mode) {
-    Object.entries(mode).forEach(([key, value]) => {
-        refs.root.style.setProperty(key, value);
-    });
+    document.querySelector('body').classList.toggle('dark');
 };
 
 export function detectTheme() {
     const savedTheme = getTheme();
     if (savedTheme) {
-        applyTheme(STORAGE_KEYS.dark);
+        document.querySelector('body').classList.add('dark');
     }
 }
 

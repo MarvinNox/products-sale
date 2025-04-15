@@ -41,7 +41,7 @@ export async function fetchProducts() {
         })
     } finally {
         hideLoader();
-    };
+    }
 };
 
 export async function fetchWishList(id) {
@@ -58,7 +58,7 @@ export async function fetchWishList(id) {
         })
     } finally {
         hideLoader();
-    };
+    }
 };
 
 export async function fetchCartList(id) {
@@ -85,5 +85,5 @@ export async function fetchCartList(id) {
         })
     } finally {
         hideLoader();
-    };
+    }
 };

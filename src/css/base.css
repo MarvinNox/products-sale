@@ -15,12 +15,24 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color: var(--main__text);
-  background-color: var(--main__back);
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+body {
+  color: var(--main__text);
+  background-color: var(--main__back);
+}
+
+body.dark {
+  --main__text: #e9e8e8;
+  --main__back: rgba(0, 0, 0, 0.87);
+  --search__back: #131212;
+  --search__back--focus: #000;
+  --nav__counter: #f8f9fa;
+  --categ__btn: #d2c8b7;
+  --products__item--back: #3a3a3a;
+  --products__categ: #b5aa97;
 }

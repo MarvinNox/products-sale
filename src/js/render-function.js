@@ -13,7 +13,7 @@ export function renderCategory(arrCategories) {
 };
 
 export function renderGoods(arrGoods) {
-    const markup = arrGoods.map(({ id, images, description, title, brand, category, price }) =>
+    const markup = arrGoods.map(({ id, images, description, title, brand = 'none', category, price }) =>
         `<li class="products__item" data-id="${id}">
             <img class="products__image" src="${images[0]}" alt="${description}"/>
             <p class="products__title">${title}</p>

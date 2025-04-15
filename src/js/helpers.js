@@ -61,3 +61,10 @@ export function detectTheme() {
         applyTheme(STORAGE_KEYS.dark);
     }
 }
+
+export function clearCategorySelector() {
+    const activeCategory = document.querySelector('button.categories__btn--active');
+    if (activeCategory) {
+        activeCategory.classList.remove('categories__btn--active');
+    }
+}

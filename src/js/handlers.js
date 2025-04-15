@@ -4,7 +4,7 @@ import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
 import { STORAGE_KEYS } from "./constants";
-import { pullData } from "./products-api";
+import { fetchProducts, pullData } from "./products-api";
 import { clearProductsList, renderGoods, renderModal } from "./render-function";
 import { refs } from "./refs";
 import {
@@ -17,6 +17,7 @@ import {
     showLoader,
     hideLoader,
     applyTheme,
+    clearCategorySelector,
 } from "./helpers.js";
 import { showModal } from "./modal";
 import {
@@ -32,11 +33,15 @@ import {
 
 export async function switchCategory(evt) {
     if (evt.target.tagName === "BUTTON") {
+
+        clearCategorySelector();
+        evt.target.classList.add('categories__btn--active')
+
         STORAGE_KEYS.selectedCategory = evt.target.textContent;
         const selectedUrl = `https://dummyjson.com/products/category/${STORAGE_KEYS.selectedCategory}?limit=12&skip=0`;
         if (STORAGE_KEYS.selectedCategory === 'all') {
             STORAGE_KEYS.selectedCategory = '';
-            STORAGE_KEYS.currentPage = 2;
+            STORAGE_KEYS.currentPage = 1;
             STORAGE_KEYS.searchValue = '';
             await pullData(STORAGE_KEYS.BASE_URL_ALL)
                 .then(response => {
@@ -50,6 +55,7 @@ export async function switchCategory(evt) {
                 }));
             return;
         } else {
+            STORAGE_KEYS.searchValue = '';
             STORAGE_KEYS.currentPage = 1;
             await pullData(selectedUrl)
                 .then(response => {
@@ -69,7 +75,7 @@ export async function switchCategory(evt) {
                 .catch(error => iziToast.error({
                     message: `${error.message}`
                 }))
-                .finally(() => hideLoadMoreBtn);
+                .finally(() => STORAGE_KEYS.currentPage++);
         };
     };
 };
@@ -101,7 +107,7 @@ export function addToWishList() {
     refs.addToWishBtn.textContent = 'Remove from Wishlist';
 };
 
-export function addToCart(event) {
+export function addToCart() {
     const cartList = getCart() || [];
     if (cartList.some(item => item === STORAGE_KEYS.selectedProdId)) {
         removeFromCart(STORAGE_KEYS.selectedProdId);
@@ -139,10 +145,11 @@ export async function searchSubmit(evt) {
     evt.preventDefault();
     notFoundDisabled();
     showLoader();
+    clearCategorySelector();
     STORAGE_KEYS.searchValue = (evt.target.elements.searchValue.value).trim();
     if (!STORAGE_KEYS.searchValue) {
         iziToast.error({
-            message: 'Please enter a valid name!'
+            message: 'Please enter a valid search keyword!'
         })
         return;
     };
@@ -183,6 +190,10 @@ export async function searchSubmit(evt) {
 
 export function clearSearch() {
     refs.form.elements.searchValue.value = '';
+    STORAGE_KEYS.currentPage = 1;
+    clearProductsList();
+    clearCategorySelector();
+    fetchProducts();
 };
 
 export function buyCart() {

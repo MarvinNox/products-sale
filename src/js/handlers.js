@@ -35,16 +35,15 @@ export async function switchCategory(evt) {
     if (evt.target.tagName === "BUTTON") {
 
         clearCategorySelector();
-        evt.target.classList.add('categories__btn--active')
 
         STORAGE_KEYS.selectedCategory = evt.target.textContent;
         const selectedUrl = `https://dummyjson.com/products/category/${STORAGE_KEYS.selectedCategory}?limit=12&skip=0`;
         if (STORAGE_KEYS.selectedCategory === 'all') {
             STORAGE_KEYS.selectedCategory = '';
-            STORAGE_KEYS.currentPage = 1;
             STORAGE_KEYS.searchValue = '';
             await pullData(STORAGE_KEYS.BASE_URL_ALL)
                 .then(response => {
+                    evt.target.classList.add('categories__btn--active');
                     STORAGE_KEYS.currentPage++;
                     clearProductsList();
                     renderGoods(response.data.products);
@@ -63,6 +62,7 @@ export async function switchCategory(evt) {
                         notFoundEnabled();
                         return;
                     };
+                    evt.target.classList.add('categories__btn--active');
                     notFoundDisabled();
                     clearProductsList();
                     renderGoods(response.data.products);

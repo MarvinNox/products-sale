@@ -1,6 +1,3 @@
-//Допоміжні функції
-
-import { STORAGE_KEYS } from "./constants";
 import { refs } from "./refs";
 import { getTheme } from "./storage";
 

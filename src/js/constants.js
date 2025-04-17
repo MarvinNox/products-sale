@@ -1,5 +1,3 @@
-//Константи
-
 export const STORAGE_KEYS = {
     LS_WL_KEY: 'userWishList',
     LS_USER_CART_KEY: 'userCart',

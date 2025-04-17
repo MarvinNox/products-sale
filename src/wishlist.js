@@ -5,7 +5,15 @@ import { detectTheme, notFoundDisabled, notFoundEnabled } from "./js/helpers";
 import { fetchWishList } from "./js/products-api";
 import { getWishlist } from "./js/storage";
 import { setCartCount, setWishListCount } from "./js/render-function";
-import { clearSearch, handleLoadMore, handleSelectProduct, scrollUp, scrollUpBtnShow, searchSubmit, themeToggler } from "./js/handlers";
+import {
+    clearSearch,
+    handleLoadMore,
+    handleSelectProduct,
+    scrollUp,
+    scrollUpBtnShow,
+    searchSubmit,
+    themeToggler
+} from "./js/handlers";
 import { hideWishModal } from "./js/modal";
 
 detectTheme();

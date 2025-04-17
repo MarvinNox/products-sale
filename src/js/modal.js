@@ -1,5 +1,3 @@
-//Описана робота модалки - відкриття закриття і все що з модалкою повʼязано
-
 import { refs } from "./refs";
 import { addToCart, addToWishList } from "./handlers"
 import { STORAGE_KEYS } from "./constants";

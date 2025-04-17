@@ -1,4 +1,3 @@
-//Функцію для створення, рендеру або видалення розмітки
 import { refs } from "./refs";
 import { getCart, getWishlist } from "./storage";
 

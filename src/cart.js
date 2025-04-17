@@ -1,11 +1,18 @@
-//Логіка сторінки Cart
-
 import { refs } from "./js/refs";
 import { detectTheme, notFoundDisabled, notFoundEnabled } from "./js/helpers";
 import { fetchCartList } from "./js/products-api";
 import { getCart } from "./js/storage";
 import { setCartCount, setWishListCount } from "./js/render-function";
-import { buyCart, clearSearch, handleLoadMore, handleSelectProduct, scrollUp, scrollUpBtnShow, searchSubmit, themeToggler } from "./js/handlers";
+import {
+    buyCart,
+    clearSearch,
+    handleLoadMore,
+    handleSelectProduct,
+    scrollUp,
+    scrollUpBtnShow,
+    searchSubmit,
+    themeToggler
+} from "./js/handlers";
 import { hideCartModal } from "./js/modal";
 
 detectTheme();

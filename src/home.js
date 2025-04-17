@@ -3,7 +3,17 @@
 import { refs } from "./js/refs";
 import { fetchCategories, fetchProducts } from "./js/products-api";
 import { setCartCount, setWishListCount } from "./js/render-function";
-import { switchCategory, handleSelectProduct, handleLoadMore, searchSubmit, clearSearch, scrollUpBtnShow, scrollUp, themeToggler } from "./js/handlers"
+import {
+    switchCategory,
+    handleSelectProduct,
+    handleLoadMore,
+    searchSubmit,
+    clearSearch,
+    scrollUpBtnShow,
+    scrollUp,
+    themeToggler
+} from "./js/handlers"
+
 import { hideModal } from "./js/modal";
 import { detectTheme } from "./js/helpers";
 

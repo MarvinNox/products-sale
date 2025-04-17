@@ -1,4 +1,3 @@
-//Робота з loacalStorage
 import { STORAGE_KEYS } from "./constants.js";
 import { setCartCount, setWishListCount } from "./render-function.js";
 

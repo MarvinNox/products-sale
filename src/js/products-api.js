@@ -1,12 +1,19 @@
-// Функції для роботи з бекендом
-import { STORAGE_KEYS } from "./constants.js";
-
-// API ендпоінти:
-
 import axios from "axios";
-import { clearProductsList, renderCategory, renderGoods } from "./render-function.js";
-import { getGoodsByID, getGoodsUrl, hideLoader, hideLoadMoreBtn, showLoadMoreBtn } from "./helpers.js";
 import iziToast from "izitoast";
+
+import { STORAGE_KEYS } from "./constants.js";
+import {
+    clearProductsList,
+    renderCategory,
+    renderGoods
+} from "./render-function.js";
+import {
+    getGoodsByID,
+    getGoodsUrl,
+    hideLoader,
+    hideLoadMoreBtn,
+    showLoadMoreBtn
+} from "./helpers.js";
 import { refs } from "./refs.js";
 
 export function pullData(KEY) {

@@ -11,13 +11,11 @@
 
 .theme-toggle-button {
   background: linear-gradient(45deg, #ff6b0a, #ff4500);
-  color: white;
 }
 
 .theme-toggle-button:hover {
   transform: scale(1.1);
   background: linear-gradient(45deg, #ffcc00, #ff9900);
-  color: #333;
 }
 
 .theme-icon {

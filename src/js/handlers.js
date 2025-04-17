@@ -1,5 +1,3 @@
-// Функції, які передаються колбеками в addEventListners
-
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
@@ -81,7 +79,6 @@ export async function switchCategory(evt) {
 };
 
 export async function handleSelectProduct(event) {
-
     if (event.target.tagName != "UL") {
         STORAGE_KEYS.selectedProdId = event.target.closest('li').dataset.id;
         await pullData(`https://dummyjson.com/products/${STORAGE_KEYS.selectedProdId}`)
